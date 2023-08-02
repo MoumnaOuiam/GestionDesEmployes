@@ -75,4 +75,26 @@ class EmployeeManager {
 
     
 }
+class Validation
+{
+    public static function validateNom($nom)
+    {
+        return !empty($nom);
+    }
+
+    public static function validatePrenom($prenom)
+    {
+        return !empty($prenom);
+    }
+
+    public static function validateAge($age)
+    {
+        return is_numeric($age) && $age > 1;
+    }
+
+    public static function validateEmail($email)
+    {
+        return !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+}
 ?>
