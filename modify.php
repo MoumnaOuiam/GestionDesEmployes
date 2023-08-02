@@ -8,6 +8,8 @@
 <body>
 <?php 
     include_once "classes/EmployeeManager.php";
+    include_once "classes/Employee.php";
+
     $employeeManager = new EmployeeManager();
 
     if (isset($_GET['id']))
@@ -18,22 +20,23 @@
         if(isset($_POST['button']))
         {
             extract($_POST);
+      
+            
 
-            // Vérification des champs
             $errors = [];
-            if (empty($nom)) {
+            if (!Validation::validateNom($nom)) {
                 $errors['nom'] = "Le nom ne peut pas être vide";
             }
 
-            if (empty($prenom)) {
+            if (!Validation::validatePrenom($prenom)) {
                 $errors['prenom'] = "Le prénom ne peut pas être vide";
             }
 
-            if (empty($age) || !is_numeric($age) || $age <= 1) {
+            if (!Validation::validateAge($age)) {
                 $errors['age'] = "L'âge doit être un nombre supérieur à 1";
             }
 
-            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if (!Validation::validateEmail($email)) {
                 $errors['email'] = "L'adresse e-mail n'est pas valide";
             }
 
@@ -114,5 +117,3 @@
 </div>
 </body>
 </html>
-
-
